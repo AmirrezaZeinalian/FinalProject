@@ -42,6 +42,8 @@ class totallist extends StatefulWidget {
 }
 
 class _totallistState extends State<totallist> {
+  final RxString searchQuery = ''.obs;
+  final RxList<Song> filteredSongs = <Song>[].obs;
   final WalletController2 walletController = Get.put(WalletController2());
   final SubscriptionController subController = Get.find<SubscriptionController>();
   final AudioPlayer _audioPlayer = AudioPlayer();
@@ -352,10 +354,21 @@ class _totallistState extends State<totallist> {
     ),
   ];
 
+  //search
+  void filterSongs(String query) {
+    searchQuery.value = query.toLowerCase();
+    if (query.isEmpty) {
+      filteredSongs.assignAll(songs);
+    } else {
+      filteredSongs.assignAll(songs.where((song) =>
+      song.title.toLowerCase().contains(query) ||
+          song.artist.toLowerCase().contains(query)
+      ).toList());
+    }
+  }
+
   void sortSongsByTitle() {
-    setState(() {
-      songs.sort((a, b) => a.title.compareTo(b.title));
-    });
+    filteredSongs.sort((a, b) => a.title.compareTo(b.title));
     Get.snackbar(
       'Sorted',
       'Songs sorted by title',
@@ -365,9 +378,7 @@ class _totallistState extends State<totallist> {
   }
 
   void sortSongsByRating() {
-    setState(() {
-      songs.sort((a, b) => b.rating.value.compareTo(a.rating.value));
-    });
+    filteredSongs.sort((a, b) => b.rating.value.compareTo(a.rating.value));
     Get.snackbar(
       'Sorted',
       'Songs sorted by rating',
@@ -379,6 +390,7 @@ class _totallistState extends State<totallist> {
   @override
   void initState() {
     super.initState();
+    filteredSongs.assignAll(songs);
     _initAudioPlayer();
   }
 
@@ -729,6 +741,24 @@ class _totallistState extends State<totallist> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+              child: TextField(
+                onChanged: filterSongs,
+                decoration: InputDecoration(
+                  hintText: 'Search songs...',
+                  prefixIcon: Icon(Icons.search, color: Colors.white70),
+                  filled: true,
+                  fillColor: Colors.white24,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                  ),
+                  contentPadding: EdgeInsets.symmetric(vertical: 12),
+                ),
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
             SizedBox(height: 15),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -757,21 +787,21 @@ class _totallistState extends State<totallist> {
             ),
             SizedBox(height: 15),
             Expanded(
-              child: ListView.builder(
-                itemCount: songs.length,
+              child: Obx(() => ListView.builder(
+                itemCount: filteredSongs.length,
                 itemBuilder: (context, index) {
                   return Obx(() => ListTile(
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: Image.asset(
-                        songs[index].imagePath,
+                        filteredSongs[index].imagePath,
                         width: 50,
                         height: 50,
                         fit: BoxFit.cover,
                       ),
                     ),
                     title: Text(
-                      songs[index].title,
+                      filteredSongs[index].title,
                       style: TextStyle(
                         color: currentSongIndex.value == index
                             ? Colors.purpleAccent
@@ -782,7 +812,7 @@ class _totallistState extends State<totallist> {
                       ),
                     ),
                     subtitle: Text(
-                      '${songs[index].artist} • \$${songs[index].price}',
+                      '${filteredSongs[index].artist} • \$${filteredSongs[index].price}',
                       style: TextStyle(
                         color: currentSongIndex.value == index
                             ? Colors.purpleAccent
@@ -798,7 +828,7 @@ class _totallistState extends State<totallist> {
                           size: 16,
                         ),
                         Text(
-                          songs[index].rating.value.toStringAsFixed(1),
+                          filteredSongs[index].rating.value.toStringAsFixed(1),
                           style: TextStyle(
                             color: Colors.amber,
                             fontSize: 14,
@@ -812,8 +842,9 @@ class _totallistState extends State<totallist> {
                       ],
                     ),
                     onTap: () async {
-                      currentSongIndex.value = index;
-                      await _loadSong(index);
+                      final originalIndex = songs.indexWhere((s) => s.title == filteredSongs[index].title);
+                      currentSongIndex.value = originalIndex;
+                      await _loadSong(originalIndex);
                       if (isPlaying.value) {
                         await _audioPlayer.play();
                       }
@@ -821,7 +852,7 @@ class _totallistState extends State<totallist> {
                     },
                   ));
                 },
-              ),
+              )),
             ),
             SizedBox(height: 15),
             ElevatedButton(
