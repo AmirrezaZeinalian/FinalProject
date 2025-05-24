@@ -358,6 +358,3 @@ class CardNumberFormatter extends TextInputFormatter {
   }
 }
 
-
-//ciogaiua;guhroi;
-//ighariughahrog;
