@@ -42,6 +42,8 @@ class JazzCategoryPage extends StatefulWidget {
 }
 
 class _JazzCategoryPageState extends State<JazzCategoryPage> {
+  final RxString searchQuery = ''.obs;
+  final RxList<Song> filteredSongs = <Song>[].obs;
   final WalletController2 walletController = Get.put(WalletController2());
   final SubscriptionController subController = Get.find<SubscriptionController>();
   final AudioPlayer _audioPlayer = AudioPlayer();
@@ -168,11 +170,24 @@ class _JazzCategoryPageState extends State<JazzCategoryPage> {
     ),
   ];
 
+
+  //search
+  void filterSongs(String query) {
+    searchQuery.value = query.toLowerCase();
+    if (query.isEmpty) {
+      filteredSongs.assignAll(songs);
+    } else {
+      filteredSongs.assignAll(songs.where((song) =>
+      song.title.toLowerCase().contains(query) ||
+          song.artist.toLowerCase().contains(query)
+      ).toList());
+    }
+  }
+
+
   // Sorting methods
   void sortSongsByTitle() {
-    setState(() {
-      songs.sort((a, b) => a.title.compareTo(b.title));
-    });
+    filteredSongs.sort((a, b) => a.title.compareTo(b.title));
     Get.snackbar(
       'Sorted',
       'Songs sorted by title',
@@ -182,9 +197,7 @@ class _JazzCategoryPageState extends State<JazzCategoryPage> {
   }
 
   void sortSongsByRating() {
-    setState(() {
-      songs.sort((a, b) => b.rating.value.compareTo(a.rating.value));
-    });
+    filteredSongs.sort((a, b) => b.rating.value.compareTo(a.rating.value));
     Get.snackbar(
       'Sorted',
       'Songs sorted by rating',
@@ -196,6 +209,7 @@ class _JazzCategoryPageState extends State<JazzCategoryPage> {
   @override
   void initState() {
     super.initState();
+    filteredSongs.assignAll(songs);
     _initAudioPlayer();
   }
 
@@ -555,8 +569,25 @@ class _JazzCategoryPageState extends State<JazzCategoryPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+              child: TextField(
+                onChanged: filterSongs,
+                decoration: InputDecoration(
+                  hintText: 'Search songs...',
+                  prefixIcon: Icon(Icons.search, color: Colors.white70),
+                  filled: true,
+                  fillColor: Colors.white24,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                  ),
+                  contentPadding: EdgeInsets.symmetric(vertical: 12),
+                ),
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
             SizedBox(height: 15),
-            // Add sorting options here
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -584,21 +615,21 @@ class _JazzCategoryPageState extends State<JazzCategoryPage> {
             ),
             SizedBox(height: 15),
             Expanded(
-              child: ListView.builder(
-                itemCount: songs.length,
+              child: Obx(() => ListView.builder(
+                itemCount: filteredSongs.length,
                 itemBuilder: (context, index) {
                   return Obx(() => ListTile(
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: Image.asset(
-                        songs[index].imagePath,
+                        filteredSongs[index].imagePath,
                         width: 50,
                         height: 50,
                         fit: BoxFit.cover,
                       ),
                     ),
                     title: Text(
-                      songs[index].title,
+                      filteredSongs[index].title,
                       style: TextStyle(
                         color: currentSongIndex.value == index
                             ? Colors.purpleAccent
@@ -609,7 +640,7 @@ class _JazzCategoryPageState extends State<JazzCategoryPage> {
                       ),
                     ),
                     subtitle: Text(
-                      '${songs[index].artist} • \$${songs[index].price}',
+                      '${filteredSongs[index].artist} • \$${filteredSongs[index].price}',
                       style: TextStyle(
                         color: currentSongIndex.value == index
                             ? Colors.purpleAccent
@@ -625,7 +656,7 @@ class _JazzCategoryPageState extends State<JazzCategoryPage> {
                           size: 16,
                         ),
                         Text(
-                          songs[index].rating.value.toStringAsFixed(1),
+                          filteredSongs[index].rating.value.toStringAsFixed(1),
                           style: TextStyle(
                             color: Colors.amber,
                             fontSize: 14,
@@ -639,8 +670,9 @@ class _JazzCategoryPageState extends State<JazzCategoryPage> {
                       ],
                     ),
                     onTap: () async {
-                      currentSongIndex.value = index;
-                      await _loadSong(index);
+                      final originalIndex = songs.indexWhere((s) => s.title == filteredSongs[index].title);
+                      currentSongIndex.value = originalIndex;
+                      await _loadSong(originalIndex);
                       if (isPlaying.value) {
                         await _audioPlayer.play();
                       }
@@ -648,7 +680,7 @@ class _JazzCategoryPageState extends State<JazzCategoryPage> {
                     },
                   ));
                 },
-              ),
+              )),
             ),
             SizedBox(height: 15),
             ElevatedButton(
