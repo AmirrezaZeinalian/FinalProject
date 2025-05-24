@@ -131,7 +131,7 @@ class _PopCategoryPageState extends State<PopCategoryPage> {
     }
   }
 
-  
+
   final List<Song> songs = [
     Song(
       title: 'perfect',
@@ -210,6 +210,7 @@ class _PopCategoryPageState extends State<PopCategoryPage> {
     // حذف Navigator.pop(context)
   }
 
+  
   @override
   void initState() {
     super.initState();
