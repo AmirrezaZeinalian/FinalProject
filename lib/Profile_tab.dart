@@ -577,6 +577,8 @@ class WalletController2 extends GetxController {
 
 
 
+
+
 // Example usage in another widget
 // class PremiumFeature extends StatelessWidget {
 //   final SubscriptionController subCtrl = Get.find();
