@@ -18,7 +18,7 @@ class LoginController extends GetxController {
       isLoading(true);
       errorMessage(''); // Clear previous errors
 
-      // Validate fields
+      // Validate fields to be correct
       if (email.value.isEmpty || password.value.isEmpty) {
         errorMessage('Please fill all fields');
         return;
@@ -27,6 +27,7 @@ class LoginController extends GetxController {
       // Mock validation (replace with real API call)
       await Future.delayed(const Duration(seconds: 1));
 
+      //checks the email and the password and the get to the home
       if (email.value == 'amir@example.com' && password.value == '123456') {
         // Access through Get.find
         Get.find<AuthController>().setLoggedIn(true);

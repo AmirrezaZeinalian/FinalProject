@@ -21,6 +21,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   bool obscureNewPassword = true;
   bool obscureConfirmPassword = true;
 
+  //fake
   final correctDay = '31';
   final correctMonth = '10';
   final correctYear = '2025';
@@ -53,6 +54,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     final pass1 = newPasswordController.text;
     final pass2 = confirmPasswordController.text;
 
+    //check
     if (pass1 == pass2 && pass1.length >= 6) {
       setState(() {
         message = 'Password successfully reset!';
@@ -179,6 +181,22 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       ],
                     ),
                     SizedBox(height: 12),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+
                     Row(
                       children: [
                         Expanded(
@@ -377,6 +395,14 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                         ),
                       ),
                       SizedBox(height: 16),
+                      SizedBox(height: 0),
+                      SizedBox(height: 0),
+                      SizedBox(height: 0),
+                      SizedBox(height: 0),
+                      SizedBox(height: 0),
+                      SizedBox(height: 0),
+                      SizedBox(height: 0),
+
                       TextField(
                         controller: confirmPasswordController,
                         obscureText: obscureConfirmPassword,

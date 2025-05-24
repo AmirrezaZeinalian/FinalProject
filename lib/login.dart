@@ -6,6 +6,8 @@ import 'AuthController.dart';
 import 'logincontroller.dart';
 
 //it has logic
+// it has design
+//it links to signup
 class LoginPage extends StatelessWidget {
   final LoginController controller = Get.put(LoginController());
   final AuthController authController = Get.put(AuthController());
