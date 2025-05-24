@@ -479,6 +479,8 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     }
   }
 
+
+  
   Future<void> _pickImage(ImageSource source) async {
     try {
       final pickedFile = await _picker.pickImage(source: source);
@@ -493,6 +495,8 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
           snackPosition: SnackPosition.BOTTOM);
     }
   }
+
+
 
   void _showSwipeAnimation(BuildContext context, String direction) {
     final double offset = direction == 'left' ? 50.0 : -50.0;
@@ -562,7 +566,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     );
   }
 
-  
+
   Widget _buildIconOption(IconData icon, String label, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
