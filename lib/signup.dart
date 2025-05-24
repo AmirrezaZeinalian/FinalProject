@@ -222,6 +222,8 @@ class RegisterPage extends StatelessWidget {
                                       ),
                                     ),
                                   ],
+
+                                  
                                 ),
                               ),
                             ),
