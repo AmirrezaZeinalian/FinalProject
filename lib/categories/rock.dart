@@ -146,9 +146,10 @@ class _RockCategoryPageState extends State<RockCategoryPage> {
       artist: 'Queen',
       assetPath: 'assets/audios/Rock/musicr2.mp3',
       imagePath: 'assets/images/Rock/BohemianRhapsody.jpg',
-      rating: 0,
+      rating: 1,
       isFree: false,
       isFavorite: false,
+      price : 28,
     ),
     Song(
       title: 'Numb',

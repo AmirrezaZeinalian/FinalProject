@@ -146,9 +146,10 @@ class _JazzCategoryPageState extends State<JazzCategoryPage> {
       artist: 'John Coltrane',
       assetPath: 'assets/audios/Jazz/musicj2.mp3',
       imagePath: 'assets/images/Jazz/Myfavouritething.jpg',
-      rating: 0,
+      rating: 1,
       isFree: false,
       isFavorite: false,
+      price : 28,
     ),
     Song(
       title: 'Summertime',
