@@ -320,6 +320,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     );
   }
 
+  
 
   Future<void> _loadSong(int index) async {
     try {
@@ -346,6 +347,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
 
 
 
+
   Future<void> _togglePlayPause() async {
     try {
       if (!_isSongPlayable(currentSongIndex.value)) {
@@ -369,6 +371,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
           snackPosition: SnackPosition.BOTTOM);
     }
   }
+
 
 
   Future<void> _playNextSong() async {
@@ -400,6 +403,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     }
   }
 
+
   Future<void> _playPreviousSong() async {
     try {
       int newIndex;
@@ -429,7 +433,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
           snackPosition: SnackPosition.BOTTOM);
     }
   }
-  
+
 
 
   String _formatTime(double seconds) {
