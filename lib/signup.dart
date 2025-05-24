@@ -186,7 +186,7 @@ class RegisterPage extends StatelessWidget {
                           SizedBox(height: 24),
 
 
-                          
+
                           // Divider
                           Row(
                             children: [
@@ -199,6 +199,11 @@ class RegisterPage extends StatelessWidget {
                             ],
                           ),
                           SizedBox(height: 24),
+                          SizedBox(height: 0),
+                          SizedBox(height: 0),
+                          SizedBox(height: 0),
+                          SizedBox(height: 0),
+                          SizedBox(height: 0),
 
                           // Login Redirect
                           Center(
