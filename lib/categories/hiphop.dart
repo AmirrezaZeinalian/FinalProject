@@ -195,6 +195,7 @@ class _HipHopCategoryPageState extends State<HipHopCategoryPage> {
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: 1),
     );
+    // حذف Navigator.pop(context)
   }
 
   void sortSongsByRating() {
@@ -205,6 +206,7 @@ class _HipHopCategoryPageState extends State<HipHopCategoryPage> {
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: 1),
     );
+    // حذف Navigator.pop(context)
   }
 
   @override
@@ -593,20 +595,14 @@ class _HipHopCategoryPageState extends State<HipHopCategoryPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: () {
-                    sortSongsByTitle();
-                    Navigator.pop(context);
-                  },
+                  onPressed: sortSongsByTitle, // فقط متد را فراخوانی کنید
                   child: Text('Sort by Title'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.purpleAccent,
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    sortSongsByRating();
-                    Navigator.pop(context);
-                  },
+                  onPressed: sortSongsByRating, // فقط متد را فراخوانی کنید
                   child: Text('Sort by Rating'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.purpleAccent,
