@@ -190,7 +190,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     ),
   ];
 
-  // Sorting methods
+
   void sortSongsByTitle() {
     filteredSongs.sort((a, b) => a.title.compareTo(b.title));
     Get.snackbar(
@@ -199,9 +199,9 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: 1),
     );
-    // حذف Navigator.pop(context)
   }
 
+  
   void sortSongsByRating() {
     filteredSongs.sort((a, b) => b.rating.value.compareTo(a.rating.value));
     Get.snackbar(
@@ -210,11 +210,9 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: 1),
     );
-    // حذف Navigator.pop(context)
   }
 
 
-  
 
   @override
   void initState() {
