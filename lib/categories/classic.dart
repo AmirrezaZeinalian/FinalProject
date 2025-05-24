@@ -278,8 +278,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     final currentIndex = currentSongIndex.value;
     final random = Random();
     int newIndex;
-
-
+    
     do {
       newIndex = random.nextInt(songs.length);
     } while (newIndex == currentIndex && songs.length > 1);
@@ -297,7 +296,6 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
         : currentMode == LoopMode.one
         ? LoopMode.all
         : LoopMode.off;
-
 
 
     await _audioPlayer.setLoopMode(nextMode);
@@ -320,7 +318,6 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     );
   }
 
-  
 
   Future<void> _loadSong(int index) async {
     try {
