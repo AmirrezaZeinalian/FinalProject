@@ -146,35 +146,6 @@ class HomeContent extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 100),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.9),
-              borderRadius: BorderRadius.circular(14),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 6,
-                  offset: Offset(0, 3),
-                )
-              ],
-            ),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Search music...',
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: BorderSide.none,
-                ),
-                filled: true,
-                fillColor: Colors.transparent,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 20),
 
         Expanded(
           child: SingleChildScrollView(
