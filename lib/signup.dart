@@ -185,6 +185,8 @@ class RegisterPage extends StatelessWidget {
                           )),
                           SizedBox(height: 24),
 
+
+                          
                           // Divider
                           Row(
                             children: [
