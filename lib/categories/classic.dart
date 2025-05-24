@@ -299,7 +299,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
         : LoopMode.off;
 
 
-    
+
     await _audioPlayer.setLoopMode(nextMode);
     loopMode.value = nextMode;
 
@@ -344,7 +344,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     }
   }
 
-  //*************************************************************************
+
 
   Future<void> _togglePlayPause() async {
     try {
@@ -357,6 +357,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
         return;
       }
 
+
       if (isPlaying.value) {
         await _audioPlayer.pause();
       } else {
@@ -368,6 +369,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
           snackPosition: SnackPosition.BOTTOM);
     }
   }
+
 
   Future<void> _playNextSong() async {
     try {
@@ -431,7 +433,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
 
 
 
-  //******************************************************************************
+
 
   String _formatTime(double seconds) {
     final duration = Duration(seconds: seconds.toInt());
