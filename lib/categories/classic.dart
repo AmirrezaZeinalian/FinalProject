@@ -562,6 +562,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     );
   }
 
+  
   Widget _buildIconOption(IconData icon, String label, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
@@ -578,6 +579,8 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
       ),
     );
   }
+
+
 
   void _showSongOptions(BuildContext context) {
     showModalBottomSheet(
@@ -1207,7 +1210,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
   }
 
 
-  
+
   @override
   void dispose() {
     _audioPlayer.dispose();
