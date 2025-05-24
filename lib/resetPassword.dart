@@ -21,6 +21,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   bool obscureNewPassword = true;
   bool obscureConfirmPassword = true;
 
+  //fake
   final correctDay = '31';
   final correctMonth = '10';
   final correctYear = '2025';
@@ -377,6 +378,14 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                         ),
                       ),
                       SizedBox(height: 16),
+                      SizedBox(height: 0),
+                      SizedBox(height: 0),
+                      SizedBox(height: 0),
+                      SizedBox(height: 0),
+                      SizedBox(height: 0),
+                      SizedBox(height: 0),
+                      SizedBox(height: 0),
+
                       TextField(
                         controller: confirmPasswordController,
                         obscureText: obscureConfirmPassword,
