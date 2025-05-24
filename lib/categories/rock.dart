@@ -193,6 +193,7 @@ class _RockCategoryPageState extends State<RockCategoryPage> {
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: 1),
     );
+    // حذف Navigator.pop(context)
   }
 
   void sortSongsByRating() {
@@ -203,6 +204,7 @@ class _RockCategoryPageState extends State<RockCategoryPage> {
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: 1),
     );
+    // حذف Navigator.pop(context)
   }
 
   @override
@@ -591,20 +593,14 @@ class _RockCategoryPageState extends State<RockCategoryPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: () {
-                    sortSongsByTitle();
-                    Navigator.pop(context);
-                  },
+                  onPressed: sortSongsByTitle, // فقط متد را فراخوانی کنید
                   child: Text('Sort by Title'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.purpleAccent,
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    sortSongsByRating();
-                    Navigator.pop(context);
-                  },
+                  onPressed: sortSongsByRating, // فقط متد را فراخوانی کنید
                   child: Text('Sort by Rating'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.purpleAccent,
