@@ -832,8 +832,6 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
 
 
 
-
-  
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF2E2A47),
@@ -1208,6 +1206,8 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     );
   }
 
+
+  
   @override
   void dispose() {
     _audioPlayer.dispose();
