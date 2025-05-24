@@ -451,6 +451,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     );
   }
 
+  
   void showLikeMessage(bool isLiked) {
     Get.snackbar(
       isLiked ? 'Liked' : 'Unliked',
@@ -462,6 +463,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
       duration: Duration(seconds: 2),
     );
   }
+
 
   void _onHorizontalDragStart(DragStartDetails details) {
     _startDragX = details.globalPosition.dx;
@@ -480,7 +482,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
   }
 
 
-  
+
   Future<void> _pickImage(ImageSource source) async {
     try {
       final pickedFile = await _picker.pickImage(source: source);
