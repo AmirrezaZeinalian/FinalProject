@@ -36,6 +36,7 @@ class Song {
   }
 }
 
+
 class JazzCategoryPage extends StatefulWidget {
   @override
   State<JazzCategoryPage> createState() => _JazzCategoryPageState();
