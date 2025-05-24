@@ -53,12 +53,6 @@ class MusicHomePage extends StatelessWidget {
         backgroundColor: Colors.deepPurple.withOpacity(0.8),
         centerTitle: true,
         elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          )
-        ],
       ),
       drawer: Drawer(
         child: ListView(
