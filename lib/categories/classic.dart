@@ -310,6 +310,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     );
   }
 
+
   Future<void> _loadSong(int index) async {
     try {
       _wasPlayingBeforeLoad = isPlaying.value;
@@ -320,8 +321,11 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
       currentTime.value = 0.0;
       isFree.value = songs[index].isFree;
 
-      if (_wasPlayingBeforeLoad) {
+      // Only auto-play if the song is playable and was playing before
+      if (_wasPlayingBeforeLoad && _isSongPlayable(index)) {
         await _audioPlayer.play();
+      } else {
+        isPlaying.value = false; // Ensure play state reflects reality
       }
     } catch (e) {
       print("Error loading song: ${songs[index].assetPath} - $e");
@@ -336,6 +340,10 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     try {
       if (!_isSongPlayable(currentSongIndex.value)) {
         _handleLockedSongAttempt();
+        if (isPlaying.value) {
+          await _audioPlayer.pause(); // Ensure we stop playback if somehow playing
+          isPlaying.value = false;
+        }
         return;
       }
 
@@ -367,8 +375,11 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
       currentSongIndex.value = newIndex;
       await _loadSong(newIndex);
 
+      // Don't automatically play if the song is locked
       if (wasPlaying && _isSongPlayable(newIndex)) {
         await _audioPlayer.play();
+      } else if (!_isSongPlayable(newIndex)) {
+        _handleLockedSongAttempt();
       }
     } catch (e) {
       print("Error playing next song: $e");
@@ -394,8 +405,11 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
       currentSongIndex.value = newIndex;
       await _loadSong(newIndex);
 
+      // Don't automatically play if the song is locked
       if (wasPlaying && _isSongPlayable(newIndex)) {
         await _audioPlayer.play();
+      } else if (!_isSongPlayable(newIndex)) {
+        _handleLockedSongAttempt();
       }
     } catch (e) {
       print("Error playing previous song: $e");
@@ -403,6 +417,8 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
           snackPosition: SnackPosition.BOTTOM);
     }
   }
+
+
 
 
   //******************************************************************************
