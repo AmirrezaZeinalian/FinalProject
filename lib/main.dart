@@ -7,6 +7,7 @@ import 'introAnimation.dart';
 import 'introwalk.dart';
 
 
+
 void main() {
   Get.put(AuthController());
   Get.put(ThemeController()); // Inject ThemeController once here
