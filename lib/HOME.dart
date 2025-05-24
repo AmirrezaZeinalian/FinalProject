@@ -47,7 +47,7 @@ class MusicHomePage extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: const Text(
-          '🎵 NAVA',
+          '🎵 SEPOTIFY',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.deepPurple.withOpacity(0.8),
