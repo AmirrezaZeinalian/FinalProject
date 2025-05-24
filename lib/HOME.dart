@@ -19,6 +19,7 @@ import 'shop_tab.dart';
 import 'Profile_tab.dart';
 import 'totallist.dart';
 
+
 class NavigationController extends GetxController {
   var selectedIndex = 0.obs;
   final ThemeController themeController = Get.find();
@@ -139,6 +140,7 @@ class HomeContent extends StatelessWidget {
       'assets/images/7.jpg'
     ];
 
+
     return Column(
       children: [
         const SizedBox(height: 100),
@@ -205,6 +207,7 @@ class HomeContent extends StatelessWidget {
       ],
     );
   }
+
 
   Widget _buildCategoryCard(String title, IconData icon, Color color, {String? imagePath}) {
     return SizedBox(
@@ -311,6 +314,7 @@ class HomeContent extends StatelessWidget {
     );
   }
 }
+
 
 class CategoryDetailPage extends StatelessWidget {
   final String title;
