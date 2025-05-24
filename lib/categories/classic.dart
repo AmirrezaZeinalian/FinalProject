@@ -732,6 +732,8 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     );
   }
 
+
+
   void _showEditModal(BuildContext context) {
     editModalController.text = editableText.value;
 
@@ -830,6 +832,8 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
 
 
 
+
+  
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF2E2A47),
