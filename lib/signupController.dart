@@ -21,6 +21,7 @@ class SignupController extends GetxController {
     obscureConfirmPassword.value = !obscureConfirmPassword.value;
   }
 
+  //validate username
   String? validateUsername(String? value) {
     if (value == null || value.trim().isEmpty) return 'Username is required';
     if (value.length < 4) return 'Username must be at least 4 characters';
