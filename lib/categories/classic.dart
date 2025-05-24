@@ -429,16 +429,14 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
           snackPosition: SnackPosition.BOTTOM);
     }
   }
-
-
-
-
+  
 
 
   String _formatTime(double seconds) {
     final duration = Duration(seconds: seconds.toInt());
     return "${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}";
   }
+
 
   void showDownloadMessage() {
     Get.snackbar(
@@ -451,7 +449,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     );
   }
 
-  
+
   void showLikeMessage(bool isLiked) {
     Get.snackbar(
       isLiked ? 'Liked' : 'Unliked',
