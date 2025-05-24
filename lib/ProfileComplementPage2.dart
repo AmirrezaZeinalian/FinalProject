@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+//updated
 class ProfileCompletionPage2 extends StatefulWidget {
   const ProfileCompletionPage2({Key? key}) : super(key: key);
 

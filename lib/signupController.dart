@@ -21,6 +21,7 @@ class SignupController extends GetxController {
     obscureConfirmPassword.value = !obscureConfirmPassword.value;
   }
 
+  //validate username
   String? validateUsername(String? value) {
     if (value == null || value.trim().isEmpty) return 'Username is required';
     if (value.length < 4) return 'Username must be at least 4 characters';
@@ -28,6 +29,7 @@ class SignupController extends GetxController {
     return null;
   }
 
+  //validate email
   String? validateEmail(String? value) {
     if (value == null || value.trim().isEmpty) return 'Email is required';
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
@@ -35,6 +37,7 @@ class SignupController extends GetxController {
     return null;
   }
 
+  //validate password
   String? validatePassword(String? value, String username) {
     if (value == null || value.trim().isEmpty) return 'Password is required';
     final hasUpper = value.contains(RegExp(r'[A-Z]'));

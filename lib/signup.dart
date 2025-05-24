@@ -207,6 +207,7 @@ class RegisterPage extends StatelessWidget {
 
                           // Login Redirect
                           Center(
+                            //linked to login
                             child: TextButton(
                               onPressed: () => Get.off(() => LoginPage()),
                               child: RichText(
@@ -223,7 +224,7 @@ class RegisterPage extends StatelessWidget {
                                     ),
                                   ],
 
-                                  
+
                                 ),
                               ),
                             ),
