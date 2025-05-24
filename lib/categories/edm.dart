@@ -816,7 +816,10 @@ class _EDMCategoryPageState extends State<EDMCategoryPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Icon(Icons.keyboard_arrow_down, color: Colors.white),
+                    IconButton(
+                      icon: Icon(Icons.keyboard_arrow_down, color: Colors.white),
+                      onPressed: () => Navigator.pop(context), // این خط را اضافه کنید
+                    ),
                     const Text('Top 100 Nigeria',
                         style: TextStyle(color: Colors.white70, fontSize: 14)),
                     IconButton(
