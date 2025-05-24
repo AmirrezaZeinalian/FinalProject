@@ -18,7 +18,7 @@ class LoginController extends GetxController {
       isLoading(true);
       errorMessage(''); // Clear previous errors
 
-      // Validate fields
+      // Validate fields to be correct
       if (email.value.isEmpty || password.value.isEmpty) {
         errorMessage('Please fill all fields');
         return;
