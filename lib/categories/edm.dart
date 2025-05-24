@@ -36,6 +36,7 @@ class Song {
   }
 }
 
+
 class EDMCategoryPage extends StatefulWidget {
   @override
   State<EDMCategoryPage> createState() => _EDMCategoryPageState();
@@ -104,7 +105,7 @@ class _EDMCategoryPageState extends State<EDMCategoryPage> {
       return;
     }
 
-    
+
     // For non-premium users, proceed with payment
     final currentBalance = walletController.balance.value;
 
