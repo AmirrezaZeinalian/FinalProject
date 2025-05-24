@@ -28,6 +28,7 @@ class NavigationController extends GetxController {
   }
 }
 
+
 class MusicHomePage extends StatelessWidget {
   final NavigationController navController = Get.put(NavigationController());
 
