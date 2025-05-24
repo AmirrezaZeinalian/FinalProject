@@ -214,6 +214,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
   }
 
 
+  
 
   @override
   void initState() {
@@ -221,6 +222,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     filteredSongs.assignAll(songs);
     _initAudioPlayer();
   }
+
 
   Future<void> _initAudioPlayer() async {
     try {
@@ -240,8 +242,6 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
           }
         }
       });
-
-
 
       _audioPlayer.positionStream.listen((position) {
         currentTime.value = position.inSeconds.toDouble();
@@ -278,7 +278,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     final currentIndex = currentSongIndex.value;
     final random = Random();
     int newIndex;
-    
+
     do {
       newIndex = random.nextInt(songs.length);
     } while (newIndex == currentIndex && songs.length > 1);
