@@ -205,6 +205,43 @@ class RegisterPage extends StatelessWidget {
                           SizedBox(height: 0),
                           SizedBox(height: 0),
 
+                          Row(
+                            children: [
+                              Expanded(child: Divider(color: Colors.grey)),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 10),
+                                child: Text('OR', style: TextStyle(color: Colors.grey)),
+                              ),
+                              Expanded(child: Divider(color: Colors.grey)),
+                            ],
+                          ),
+                          SizedBox(height: 20),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                icon: Image.asset(
+                                  'assets/google.png',
+                                  height: 40,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Icon(Icons.g_mobiledata, size: 40),
+                                ),
+                                onPressed: () {},
+                              ),
+                              SizedBox(width: 20),
+                              IconButton(
+                                icon: Image.asset(
+                                  'assets/facebook.png',
+                                  height: 40,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Icon(Icons.facebook, size: 40),
+                                ),
+                                onPressed: () {},
+                              ),
+                            ],
+                          ),
+
                           // Login Redirect
                           Center(
                             //linked to login
