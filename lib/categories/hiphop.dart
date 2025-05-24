@@ -36,6 +36,7 @@ class Song {
   }
 }
 
+
 class HipHopCategoryPage extends StatefulWidget {
   @override
   State<HipHopCategoryPage> createState() => _HipHopCategoryPageState();
@@ -131,7 +132,7 @@ class _HipHopCategoryPageState extends State<HipHopCategoryPage> {
     }
   }
 
-  
+
   final List<Song> songs = [
     Song(
       title: 'Changes',
