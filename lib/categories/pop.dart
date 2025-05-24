@@ -210,7 +210,7 @@ class _PopCategoryPageState extends State<PopCategoryPage> {
     // حذف Navigator.pop(context)
   }
 
-  
+
   @override
   void initState() {
     super.initState();
