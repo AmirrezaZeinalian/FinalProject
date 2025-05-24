@@ -181,6 +181,22 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       ],
                     ),
                     SizedBox(height: 12),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+                    SizedBox(height: 0),
+
                     Row(
                       children: [
                         Expanded(
