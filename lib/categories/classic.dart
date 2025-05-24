@@ -9,8 +9,6 @@ import 'package:just_audio/just_audio.dart';
 import 'dart:math';
 import 'package:amiran/Profile_tab.dart';
 
-
-
 class Song {
   final String title;
   final String artist;
@@ -72,6 +70,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
   final RxBool allowPlayLockedSongs = false.obs;
 
 
+
   void filterSongs(String query) {
     searchQuery.value = query.toLowerCase();
     if (query.isEmpty) {
@@ -102,6 +101,8 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
       duration: Duration(seconds: 2),
     );
   }
+
+
 
   void _handleMusicPurchase() {
     final currentSong = songs[currentSongIndex.value];
@@ -212,6 +213,8 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     // حذف Navigator.pop(context)
   }
 
+
+
   @override
   void initState() {
     super.initState();
@@ -251,6 +254,8 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     }
   }
 
+
+
   Future<void> _toggleShuffle() async {
     final newShuffleState = !_audioPlayer.shuffleModeEnabled;
     await _audioPlayer.setShuffleModeEnabled(newShuffleState);
@@ -268,6 +273,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     }
   }
 
+  
   void _shufflePlaylist() {
     final currentIndex = currentSongIndex.value;
     final random = Random();
