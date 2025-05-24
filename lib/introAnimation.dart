@@ -284,7 +284,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
                   // نام اپ
                   const Text(
-                    'Purple Beats',
+                    'SEPOTIFY',
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
