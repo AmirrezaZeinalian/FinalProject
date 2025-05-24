@@ -148,6 +148,8 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     }
   }
 
+
+  
   final List<Song> songs = [
     Song(
       title: 'Moonlight Sonata',
@@ -191,6 +193,8 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
   ];
 
 
+
+
   void sortSongsByTitle() {
     filteredSongs.sort((a, b) => a.title.compareTo(b.title));
     Get.snackbar(
@@ -201,7 +205,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     );
   }
 
-  
+
   void sortSongsByRating() {
     filteredSongs.sort((a, b) => b.rating.value.compareTo(a.rating.value));
     Get.snackbar(
