@@ -41,6 +41,7 @@ class ClassicalCategoryPage extends StatefulWidget {
   State<ClassicalCategoryPage> createState() => _ClassicalCategoryPageState();
 }
 
+
 class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
   final RxString searchQuery = ''.obs;
   final RxList<Song> filteredSongs = <Song>[].obs;
@@ -68,6 +69,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
   final TextEditingController editModalController = TextEditingController();
   final ImagePicker _picker = ImagePicker();
   final RxBool allowPlayLockedSongs = false.obs;
+
 
 
 
@@ -149,7 +151,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
   }
 
 
-  
+
   final List<Song> songs = [
     Song(
       title: 'Moonlight Sonata',
