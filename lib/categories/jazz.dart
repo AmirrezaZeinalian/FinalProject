@@ -132,6 +132,7 @@ class _JazzCategoryPageState extends State<JazzCategoryPage> {
     }
   }
 
+  
   final List<Song> songs = [
     Song(
       title: 'So What',
