@@ -37,6 +37,7 @@ class SignupController extends GetxController {
     return null;
   }
 
+  //validate password
   String? validatePassword(String? value, String username) {
     if (value == null || value.trim().isEmpty) return 'Password is required';
     final hasUpper = value.contains(RegExp(r'[A-Z]'));
