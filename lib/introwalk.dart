@@ -51,7 +51,7 @@ class OnboardingPage extends StatelessWidget {
   final List<Map<String, String>> onboardingData = [
     {
       "image": "assets/images/intro1.jpg",
-      "title": "Welcome to Melody Player",
+      "title": "Welcome to Sepotify",
       "subtitle": "Enjoy your favorite music anytime, anywhere."
     },
     {
@@ -114,7 +114,7 @@ class OnboardingPage extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.only(top: 32),
                   child: Text(
-                    'Music Player',
+                    'Sepotify',
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
