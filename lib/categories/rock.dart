@@ -217,7 +217,7 @@ class _RockCategoryPageState extends State<RockCategoryPage> {
   }
 
 
-  
+
   Future<void> _initAudioPlayer() async {
     try {
       await _loadSong(currentSongIndex.value);
