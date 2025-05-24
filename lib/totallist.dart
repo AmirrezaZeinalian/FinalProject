@@ -129,7 +129,7 @@ class _totallistState extends State<totallist> {
   }
 
 
-  
+
   final List<Song> songs = [
     Song(
       title: 'Moonlight Sonata',
@@ -360,6 +360,8 @@ class _totallistState extends State<totallist> {
     ),
   ];
 
+
+  
   //search
   void filterSongs(String query) {
     searchQuery.value = query.toLowerCase();
