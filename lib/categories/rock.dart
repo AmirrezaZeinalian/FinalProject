@@ -131,7 +131,7 @@ class _RockCategoryPageState extends State<RockCategoryPage> {
     }
   }
 
-  
+
   final List<Song> songs = [
     Song(
       title: 'Smells Like Teen Spirit',
@@ -216,6 +216,8 @@ class _RockCategoryPageState extends State<RockCategoryPage> {
     _initAudioPlayer();
   }
 
+
+  
   Future<void> _initAudioPlayer() async {
     try {
       await _loadSong(currentSongIndex.value);
