@@ -54,6 +54,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     final pass1 = newPasswordController.text;
     final pass2 = confirmPasswordController.text;
 
+    //check
     if (pass1 == pass2 && pass1.length >= 6) {
       setState(() {
         message = 'Password successfully reset!';
