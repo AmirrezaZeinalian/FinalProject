@@ -104,6 +104,7 @@ class _EDMCategoryPageState extends State<EDMCategoryPage> {
       return;
     }
 
+    
     // For non-premium users, proceed with payment
     final currentBalance = walletController.balance.value;
 
