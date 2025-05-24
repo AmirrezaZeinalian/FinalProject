@@ -273,11 +273,12 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
     }
   }
 
-  
+
   void _shufflePlaylist() {
     final currentIndex = currentSongIndex.value;
     final random = Random();
     int newIndex;
+
 
     do {
       newIndex = random.nextInt(songs.length);
@@ -289,7 +290,6 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
       _audioPlayer.play();
     }
   }
-
   Future<void> _toggleRepeat() async {
     final currentMode = _audioPlayer.loopMode;
     final nextMode = currentMode == LoopMode.off
@@ -298,6 +298,8 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
         ? LoopMode.all
         : LoopMode.off;
 
+
+    
     await _audioPlayer.setLoopMode(nextMode);
     loopMode.value = nextMode;
 
