@@ -204,18 +204,7 @@ class RegisterPage extends StatelessWidget {
                           SizedBox(height: 0),
                           SizedBox(height: 0),
                           SizedBox(height: 0),
-
-                          Row(
-                            children: [
-                              Expanded(child: Divider(color: Colors.grey)),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 10),
-                                child: Text('OR', style: TextStyle(color: Colors.grey)),
-                              ),
-                              Expanded(child: Divider(color: Colors.grey)),
-                            ],
-                          ),
-                          SizedBox(height: 20),
+                          
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
