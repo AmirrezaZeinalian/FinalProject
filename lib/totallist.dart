@@ -1525,6 +1525,7 @@ class _totallistState extends State<totallist> {
     );
   }
 
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1540,6 +1541,7 @@ class _totallistState extends State<totallist> {
       ),
     );
   }
+
 
   @override
   void dispose() {
