@@ -38,8 +38,6 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/splash', page: () => const SplashScreen()),
         GetPage(name: '/home', page: () => OnboardingPage()),
       ],
-
-
     ));
   }
 }
