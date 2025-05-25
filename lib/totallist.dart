@@ -380,10 +380,66 @@ class _totallistState extends State<totallist> {
       isFree: true,
       isFavorite: false,
     ),
+
+
+    Song(
+      title: 'let me love you',
+      artist: 'DJ snake',
+      assetPath: 'assets/audios/another/anothera1.mp3',
+      imagePath: 'assets/images/anotherimages/photo.jpg',
+      rating: 0,
+      isFree: true,
+      isFavorite: false,
+    ),
+    Song(
+      title: 'middle of the night',
+      artist: 'elly duhne',
+      assetPath: 'assets/audios/another/anothera2.mp3',
+      imagePath: 'assets/images/anotherimages/photoo.jpg',
+      rating: 0,
+      isFree: true,
+      isFavorite: false,
+    ),
+    Song(
+      title: 'shape of you',
+      artist: 'ed sheeran',
+      assetPath: 'assets/audios/another/anothera3.mp3',
+      imagePath: 'assets/images/anotherimages/picturee.jpg',
+      rating: 2,
+      isFree: true,
+      isFavorite: false,
+    ),
+    Song(
+      title: 'shape of my heart',
+      artist: 'doholci',
+      assetPath: 'assets/audios/another/anothera4.mp3',
+      imagePath: 'assets/images/anotherimages/photo2.jpg',
+      rating: 0,
+      isFree: true,
+      isFavorite: false,
+    ),
+    Song(
+      title: 'ma cherie',
+      artist: 'nadka',
+      assetPath: 'assets/audios/another/anothera5.mp3',
+      imagePath: 'assets/images/anotherimages/anotherimages2a.jpg',
+      rating: 0,
+      isFree: true,
+      isFavorite: false,
+    ),
+    Song(
+      title: 'to kharab kardi hame chizo khodet',
+      artist: 'golzar',
+      assetPath: 'assets/audios/another/anothera6.mp3',
+      imagePath: 'assets/images/anotherimages/golzar.jpg',
+      rating: 3,
+      isFree: true,
+      isFavorite: false,
+    ),
   ];
 
 
-  
+
   //search
   void filterSongs(String query) {
     searchQuery.value = query.toLowerCase();
@@ -1398,7 +1454,7 @@ class _totallistState extends State<totallist> {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start, // تغییر از spaceBetween به start
             children: [
               Text(
                 'All Songs',
@@ -1407,20 +1463,6 @@ class _totallistState extends State<totallist> {
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
-              ),
-              Row(
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.sort, color: Colors.white),
-                    onPressed: sortSongsByTitle,
-                    tooltip: 'Sort by Title',
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.star, color: Colors.white),
-                    onPressed: sortSongsByRating,
-                    tooltip: 'Sort by Rating',
-                  ),
-                ],
               ),
             ],
           ),
