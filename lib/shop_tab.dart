@@ -57,7 +57,7 @@ class ShopPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Shop"),
+        title: const Text("Music Shop"),
         backgroundColor: Colors.deepPurple.withOpacity(0.8),
       ),
       floatingActionButton: FloatingActionButton(
@@ -158,32 +158,39 @@ class ShopPage extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.9),
-                        borderRadius: BorderRadius.circular(14),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 6,
-                            offset: Offset(0, 3),
-                          )
-                        ],
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Search music...',
-                          prefixIcon: const Icon(Icons.search),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(14),
-                            borderSide: BorderSide.none,
+                  // Advertising Banner
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    decoration: BoxDecoration(
+                      color: Colors.deepPurple.withOpacity(0.7),
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          blurRadius: 8,
+                          offset: Offset(0, 4),
+                        ),],
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          "🎵 Premium Music Collection 🎵",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
-                          filled: true,
-                          fillColor: Colors.transparent,
                         ),
-                      ),
+                        SizedBox(height: 8),
+                        Text(
+                          "Explore unlimited tracks, high-quality audio, and exclusive releases!",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.white70,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 20),
