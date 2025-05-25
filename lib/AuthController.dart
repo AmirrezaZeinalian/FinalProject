@@ -27,16 +27,3 @@ class AuthController extends GetxController {
 // // To logout from anywhere:
 // AuthController.to.setLoggedIn(false);
 
-// how to use it
-
-// // In any other widget or controller:
-// bool isLoggedIn = AuthController.to.isLoggedIn.value;
-//
-// // Reactively listen to changes:
-// Obx(() {
-// bool isLoggedIn = AuthController.to.isLoggedIn.value;
-// return Text(isLoggedIn ? 'Logged In' : 'Logged Out');
-// });
-//
-// // To logout from anywhere:
-// AuthController.to.setLoggedIn(false);
