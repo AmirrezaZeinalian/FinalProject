@@ -8,7 +8,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:just_audio/just_audio.dart';
 import 'dart:math';
 import 'package:amiran/Profile_tab.dart';
+import 'package:amiran/AuthController.dart';
 
+import '../login.dart';
 class Song {
   final String title;
   final String artist;
@@ -45,6 +47,7 @@ class ClassicalCategoryPage extends StatefulWidget {
 
 
 class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
+  final AuthController authController = Get.put(AuthController());
   final RxString searchQuery = ''.obs;
   final RxList<Song> filteredSongs = <Song>[].obs;
   final ScrollController _scrollController = ScrollController();
@@ -109,6 +112,21 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
 
 
   void _handleMusicPurchase() {
+    // First check if user is logged in
+    if (!authController.isLoggedIn.value) {
+      Get.snackbar(
+        'Login Required',
+        'Please login first to purchase music',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        duration: Duration(seconds: 2),
+      );
+      // You can navigate to login page here if you want
+      Get.to(() => LoginPage());
+      return;
+    }
+
     final currentSong = songs[currentSongIndex.value];
 
     // Check if user is premium
@@ -1096,40 +1114,51 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                Obx(() {
-                  if (isFree.value || isPurchased.value) {
-                    return GestureDetector(
-                      onTap: () {
-                        isDownloaded.value = true;
-                        showDownloadMessage();
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-                        decoration: BoxDecoration(
-                          color: Colors.purpleAccent,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Text('Download',
-                            style: TextStyle(color: Colors.white, fontSize: 16)),
+              Obx(() {
+                if (isFree.value || isPurchased.value) {
+                  return GestureDetector(
+                    onTap: () {
+                      if (!authController.isLoggedIn.value) {
+                        Get.snackbar(
+                          'Login Required',
+                          'Please login first to download music',
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: Colors.red,
+                          colorText: Colors.white,
+                          duration: Duration(seconds: 2),
+                        );
+                        return;
+                      }
+                      isDownloaded.value = true;
+                      showDownloadMessage();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                      decoration: BoxDecoration(
+                        color: Colors.purpleAccent,
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                    );
-                  } else {
-                    return GestureDetector(
-                      onTap: _handleMusicPurchase,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-                        decoration: BoxDecoration(
-                          color: Colors.green,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Text(
-                          'Buy for \$${songs[currentSongIndex.value].price.toStringAsFixed(2)}',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        ),
+                      child: const Text('Download',
+                          style: TextStyle(color: Colors.white, fontSize: 16)),
+                    ),
+                  );
+                } else {
+                  return GestureDetector(
+                    onTap: _handleMusicPurchase,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                    );
-                  }
-                }),
+                      child: Text(
+                        'Buy for \$${songs[currentSongIndex.value].price.toStringAsFixed(2)}',
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                    ),
+                  );
+                }
+              }),
 
                 const SizedBox(height: 16),
                 TextField(
