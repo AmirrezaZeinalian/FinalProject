@@ -105,7 +105,7 @@ class _ProfileTabState extends State<ProfileTab> {
       "🎵 About Us",
       "This music player app was proudly created in the year 1404 by Mr. Amir Torab Eghdami and Mr. Amirreza Zeinalian as part of their Advanced Programming project at Shahid Beheshti University.\n\nBoth developers are passionate Computer Engineering students dedicated to crafting smooth, stylish, and functional user experiences. This project is a reflection of their creativity, collaboration, and coding excellence.\n\nEnjoy the music – powered by innovation and built with heart.",
       snackPosition: SnackPosition.TOP,
-      duration: const Duration(seconds: 10),
+      duration: const Duration(seconds: 20),
       backgroundColor: Colors.deepPurple.shade800.withOpacity(0.9),
       colorText: Colors.white,
       borderRadius: 20,
@@ -616,3 +616,81 @@ class WalletController2 extends GetxController {
 // ? "Premium User"
 // : "Basic User"
 // ));
+
+
+
+
+//۱. _pickImage()
+// انتخاب عکس پروفایل از گالری یا دوربین با استفاده از ImagePicker
+//
+// نمایش دیالوگ انتخاب منبع تصویر
+//
+// آپدیت تصویر پروفایل در حالت استیت
+//
+// ۲. _changeTheme(bool value)
+// تغییر تم بین تاریک و روشن
+//
+// فراخوانی کنترلر ThemeController برای اعمال تغییرات
+//
+// ۳. _deleteAccount()
+// نمایش دیالوگ تایید برای حذف حساب کاربری
+//
+// دارای دو گزینه Yes/No
+//
+// ۴. _contactSupport()
+// نمایش اسنک بار با اطلاعات تماس با پشتیبانی
+//
+// ۵. _AboutUs()
+// نمایش اسنک بار با اطلاعات درباره توسعه‌دهندگان اپلیکیشن
+//
+// طراحی زیبا با انیمیشن و افکت‌های ویژه
+//
+// ۶. _buyPremium()
+// نمایش مدال باتم شیت برای خرید اشتراک پریمیوم
+//
+// شامل گزینه‌های مختلف خرید اشتراک
+//
+// ۷. _handlePurchase(int price)
+// پردازش خرید اشتراک پریمیوم
+//
+// بررسی موجودی کیف پول و انجام تراکنش
+//
+// آپدیت وضعیت اشتراک در صورت موفقیت
+//
+// ۸. _editProfile()
+// انتقال به صفحه ویرایش پروفایل
+//
+// دریافت و اعمال تغییرات اطلاعات کاربر
+//
+// ویجت‌های کلیدی:
+// ۱. Obx
+// برای نمایش واکنش‌گرای تغییرات داده‌ها (موجودی کیف پول، وضعیت اشتراک)
+//
+// ۲. CircleAvatar
+// نمایش عکس پروفایل کاربر با امکان تغییر
+//
+// ۳. Container با LinearGradient
+// ایجاد کارت موزیک والت با گرادیانت رنگی
+//
+// ۴. _buildListTile
+// ویجت سفارشی برای آیتم‌های منو با آیکون و عنوان
+//
+// ۵. SwitchListTile
+// برای تغییر تم تاریک/روشن
+//
+// ۶. showModalBottomSheet
+// نمایش مدال خرید اشتراک پریمیوم
+//
+// ۷. Get.snackbar
+// نمایش پیام‌های مختلف با استایل سفارشی
+//
+// نکات کلیدی طراحی:
+// استفاده از گرادیانت عمودی برای پس‌زمینه
+//
+// کارت موزیک والت با سایه و افکت‌های زیبا
+//
+// آیتم‌های منو با افکت‌های شیشه‌ای (glassmorphism)
+//
+// انیمیشن‌های روان برای تغییر حالت‌ها
+//
+// واکنش‌گرایی کامل با GetX
