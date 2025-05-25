@@ -8,6 +8,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:just_audio/just_audio.dart';
 import 'dart:math';
 import 'package:amiran/Profile_tab.dart';
+import '../AuthController.dart';
+import '../login.dart';
 
 class Song {
   final String title;
@@ -43,6 +45,7 @@ class HipHopCategoryPage extends StatefulWidget {
 }
 
 class _HipHopCategoryPageState extends State<HipHopCategoryPage> {
+  final AuthController authController = Get.put(AuthController());
   final RxString searchQuery = ''.obs;
   final RxList<Song> filteredSongs = <Song>[].obs;
   final WalletController2 walletController = Get.put(WalletController2());
@@ -89,6 +92,21 @@ class _HipHopCategoryPageState extends State<HipHopCategoryPage> {
   }
 
   void _handleMusicPurchase() {
+    // First check if user is logged in
+    if (!authController.isLoggedIn.value) {
+      Get.snackbar(
+        'Login Required',
+        'Please login first to purchase music',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        duration: Duration(seconds: 2),
+      );
+      // You can navigate to login page here if you want
+      Get.to(() => LoginPage());
+      return;
+    }
+
     final currentSong = songs[currentSongIndex.value];
 
     // Check if user is premium
@@ -1069,6 +1087,17 @@ class _HipHopCategoryPageState extends State<HipHopCategoryPage> {
                   if (isFree.value || isPurchased.value) {
                     return GestureDetector(
                       onTap: () {
+                        if (!authController.isLoggedIn.value) {
+                          Get.snackbar(
+                            'Login Required',
+                            'Please login first to download music',
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: Colors.red,
+                            colorText: Colors.white,
+                            duration: Duration(seconds: 2),
+                          );
+                          return;
+                        }
                         isDownloaded.value = true;
                         showDownloadMessage();
                       },
