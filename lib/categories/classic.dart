@@ -295,6 +295,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
       _audioPlayer.play();
     }
   }
+  
   Future<void> _toggleRepeat() async {
     final currentMode = _audioPlayer.loopMode;
     final nextMode = currentMode == LoopMode.off
