@@ -530,6 +530,7 @@ class _totallistState extends State<totallist> {
     }
   }
 
+  //play next song
   Future<void> _playNextSong() async {
     try {
       int newIndex;
