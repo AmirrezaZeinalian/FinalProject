@@ -115,6 +115,18 @@ flutter:
     - assets/images/Rock/linkinpark.jpg
     - assets/audios/Rock/musicr4.mp3
     - assets/images/Rock/backInBlack.jpg
+    - assets/audios/another/anothera1.mp3
+    - assets/audios/another/anothera2.mp3
+    - assets/audios/another/anothera4.mp3
+    - assets/audios/another/anothera3.mp3
+    - assets/audios/another/anothera5.mp3
+    - assets/audios/another/anothera6.mp3
+    - assets/images/anotherimages/golzar.jpg
+    - assets/images/anotherimages/anotherimages2a.jpg
+    - assets/images/anotherimages/photo.jpg
+    - assets/images/anotherimages/photo2.jpg
+    - assets/images/anotherimages/photoo.jpg
+    - assets/images/anotherimages/picturee.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
