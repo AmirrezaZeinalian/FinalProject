@@ -204,7 +204,7 @@ class RegisterPage extends StatelessWidget {
                           SizedBox(height: 0),
                           SizedBox(height: 0),
                           SizedBox(height: 0),
-                          
+
 
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
