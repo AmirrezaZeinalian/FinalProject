@@ -806,6 +806,7 @@ class _totallistState extends State<totallist> {
     );
   }
 
+  
   void _showSongOptions(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -959,6 +960,7 @@ class _totallistState extends State<totallist> {
     );
   }
 
+
   void _showEditModal(BuildContext context) {
     editModalController.text = editableText.value;
 
@@ -1054,6 +1056,7 @@ class _totallistState extends State<totallist> {
       ),
     );
   }
+
 
   Widget _buildPlayerView() {
     return GestureDetector(
@@ -1525,7 +1528,7 @@ class _totallistState extends State<totallist> {
     );
   }
 
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
