@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'AuthController.dart';
 import 'Payment.dart';
 import 'dart:io';
 import 'ThemeController2.dart';
@@ -80,10 +81,17 @@ class _ProfileTabState extends State<ProfileTab> {
         title: const Text("Delete Account", style: TextStyle(color: Colors.red)),
         content: const Text("Are you sure you want to delete your account?"),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text("No")),
+          TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text("No")
+          ),
           TextButton(
             onPressed: () {
               Navigator.pop(context);
+              // Add this line to set isLoggedIn to false
+              AuthController.to.setLoggedIn(false);
+              // Optional: You might want to navigate to login screen after deletion
+              Get.offAllNamed('/login');
             },
             child: const Text("Yes", style: TextStyle(color: Colors.red)),
           ),
