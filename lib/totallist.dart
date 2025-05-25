@@ -383,7 +383,6 @@ class _totallistState extends State<totallist> {
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: 1),
     );
-    // حذف Navigator.pop(context)
   }
 
   void sortSongsByRating() {
@@ -394,7 +393,6 @@ class _totallistState extends State<totallist> {
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: 1),
     );
-    // حذف Navigator.pop(context)
   }
 
   @override
