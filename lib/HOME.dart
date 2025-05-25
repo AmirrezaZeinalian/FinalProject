@@ -19,7 +19,6 @@ import 'shop_tab.dart';
 import 'Profile_tab.dart';
 import 'totallist.dart';
 
-
 class NavigationController extends GetxController {
   var selectedIndex = 0.obs;
   final ThemeController themeController = Get.find();
