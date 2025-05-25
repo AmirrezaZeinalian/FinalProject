@@ -387,7 +387,7 @@ class _totallistState extends State<totallist> {
       artist: 'DJ snake',
       assetPath: 'assets/audios/another/anothera1.mp3',
       imagePath: 'assets/images/anotherimages/photo.jpg',
-      rating: 0,
+      rating: 1,
       isFree: true,
       isFavorite: false,
     ),
@@ -806,7 +806,7 @@ class _totallistState extends State<totallist> {
     );
   }
 
-  
+
   void _showSongOptions(BuildContext context) {
     showModalBottomSheet(
       context: context,
