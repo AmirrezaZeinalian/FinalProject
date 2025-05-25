@@ -38,8 +38,7 @@ class MusicHomePage extends StatelessWidget {
   final List<Widget> pages = [
     const HomeContent(),
     ShopPage(),
-    const ProfileTab(),
-    const FavoritesTab(),
+    ProfileTab(),
     totallist(),
   ];
 
@@ -116,7 +115,6 @@ class MusicHomePage extends StatelessWidget {
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Shop'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorites'),
           BottomNavigationBarItem(icon: Icon(Icons.list), label: 'List'), // New List button
         ],
       ),
