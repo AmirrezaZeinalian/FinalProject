@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'Profile_tab.dart';
+
 class PaymentPage extends StatefulWidget {
   const PaymentPage({Key? key}) : super(key: key);
 
@@ -16,8 +17,6 @@ class _PaymentPageState extends State<PaymentPage> {
 
   // Get the WalletController instance
   final WalletController2 walletController = Get.find<WalletController2>();
-
-  final String _userPassword = "1234"; // Simulated last 4 digits
 
   @override
   void dispose() {
@@ -184,7 +183,7 @@ class _PaymentPageState extends State<PaymentPage> {
       maxLength: 4,
       decoration: _buildInputDecoration(
         label: 'Security PIN',
-        hint: 'Last 4 digits of password',
+        hint: 'Last 4 digits of card number',
         icon: Icons.lock_outline,
       ),
     );
@@ -265,6 +264,14 @@ class _PaymentPageState extends State<PaymentPage> {
     );
   }
 
+  String _getLastFourDigits() {
+    final cardNumber = _cardNumberController.text.replaceAll(' ', '');
+    if (cardNumber.length >= 4) {
+      return cardNumber.substring(cardNumber.length - 4);
+    }
+    return '';
+  }
+
   void _processPayment() {
     final cardNumber = _cardNumberController.text.replaceAll(' ', '');
     if (cardNumber.length != 16) {
@@ -272,8 +279,9 @@ class _PaymentPageState extends State<PaymentPage> {
       return;
     }
 
-    if (_pinController.text != _userPassword) {
-      _showError('Incorrect PIN. Please enter the last 4 digits of your password');
+    final lastFourDigits = _getLastFourDigits();
+    if (_pinController.text != lastFourDigits) {
+      _showError('Incorrect PIN. Please enter the last 4 digits of your card number');
       return;
     }
 
@@ -357,4 +365,3 @@ class CardNumberFormatter extends TextInputFormatter {
     );
   }
 }
-
