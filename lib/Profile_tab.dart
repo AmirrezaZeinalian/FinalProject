@@ -502,7 +502,7 @@ class _ProfileTabState extends State<ProfileTab> {
                 _buildListTile(Icons.upgrade, "Buy Premium", _buyPremium),
                 _buildListTile(
                   Icons.delete_forever,
-                  "Delete Account",
+                  "logout Account",
                   _deleteAccount,
                   color: Colors.red,
                 ),
