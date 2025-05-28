@@ -10,6 +10,7 @@ import 'dart:math';
 import 'package:amiran/Profile_tab.dart';
 
 import 'AuthController.dart';
+import 'HOME.dart';
 import 'login.dart';
 
 class Song {
@@ -148,6 +149,40 @@ class _totallistState extends State<totallist> {
         duration: const Duration(seconds: 5),
       );
     }
+  }
+
+
+  void _handleBackButton() {
+    if (showPlayer.value) {
+      // If player is showing, hide it and pause the music
+      showPlayer.value = false;
+      _audioPlayer.pause();
+    } else {
+      // If player is not showing, navigate back to MusicHomePage
+      Get.offAll(() => MusicHomePage()); // Assuming MusicHomePage is your home page
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async {
+        _handleBackButton();
+        return false; // Prevent default back behavior
+      },
+      child: Scaffold(
+        backgroundColor: const Color(0xFF2E2A47),
+        body: SafeArea(
+          child: Obx(() {
+            if (showPlayer.value && currentSongIndex.value != -1) {
+              return _buildPlayerView();
+            } else {
+              return _buildSongListView();
+            }
+          }),
+        ),
+      ),
+    );
   }
 
 
@@ -1072,10 +1107,7 @@ class _totallistState extends State<totallist> {
               children: [
                 IconButton(
                   icon: const Icon(Icons.arrow_back, color: Colors.white),
-                  onPressed: () {
-                    showPlayer.value = false;
-                    _audioPlayer.pause();
-                  },
+                  onPressed: _handleBackButton,
                 ),
                 const Text('Now Playing',
                     style: TextStyle(color: Colors.white70, fontSize: 14)),
@@ -1527,24 +1559,6 @@ class _totallistState extends State<totallist> {
       ],
     );
   }
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF2E2A47),
-      body: SafeArea(
-        child: Obx(() {
-          if (showPlayer.value && currentSongIndex.value != -1) {
-            return _buildPlayerView();
-          } else {
-            return _buildSongListView();
-          }
-        }),
-      ),
-    );
-  }
-
 
   @override
   void dispose() {
