@@ -1,527 +1,250 @@
+import 'package:amiran/resetPasswordController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+class ResetPasswordPage extends StatelessWidget {
+  final ResetPasswordController controller = Get.put(ResetPasswordController());
+  final _formKey = GlobalKey<FormState>(); // Form key for validation
 
-import 'login.dart';
-
-class ResetPasswordPage extends StatefulWidget {
-  @override
-  _ResetPasswordPageState createState() => _ResetPasswordPageState();
-}
-
-class _ResetPasswordPageState extends State<ResetPasswordPage> {
-  final dayController = TextEditingController();
-  final monthController = TextEditingController();
-  final yearController = TextEditingController();
-  final cityController = TextEditingController();
-  final newPasswordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
-
-  bool showResetSection = false;
-  String message = '';
-  bool obscureNewPassword = true;
-  bool obscureConfirmPassword = true;
-
-  //fake
-  final correctDay = '31';
-  final correctMonth = '10';
-  final correctYear = '2025';
-  final correctCity = 'rasht';
-
-  void verifyAnswers() {
-    final day = dayController.text.trim();
-    final month = monthController.text.trim();
-    final year = yearController.text.trim();
-    final city = cityController.text.trim().toLowerCase();
-
-    final isDateCorrect =
-        day == correctDay && month == correctMonth && year == correctYear;
-    final isCityCorrect = city == correctCity;
-
-    if (isDateCorrect && isCityCorrect) {
-      setState(() {
-        showResetSection = true;
-        message = '';
-      });
-    } else {
-      setState(() {
-        showResetSection = false;
-        message = 'The provided information is incorrect.';
-      });
-    }
-  }
-
-  void resetPassword() {
-    final pass1 = newPasswordController.text;
-    final pass2 = confirmPasswordController.text;
-
-    //check
-    if (pass1 == pass2 && pass1.length >= 6) {
-      setState(() {
-        message = 'Password successfully reset!';
-      });
-      // Navigate to LoginPage after 2 seconds
-      Future.delayed(Duration(seconds: 2), () {
-        Get.offAll(() => LoginPage(),
-            transition: Transition.fadeIn,
-            duration: Duration(milliseconds: 500));
-      });
-    } else {
-      setState(() {
-        message = 'Passwords do not match or are too short.';
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    dayController.dispose();
-    monthController.dispose();
-    yearController.dispose();
-    cityController.dispose();
-    newPasswordController.dispose();
-    confirmPasswordController.dispose();
-    super.dispose();
-  }
-
-  InputDecoration _inputDecoration(String label, {Widget? suffixIcon, String? hintText}) {
+  InputDecoration _inputDecoration(String label, IconData icon, {Widget? suffixIcon}) {
     return InputDecoration(
       labelText: label,
-      hintText: hintText,
-      labelStyle: TextStyle(color: Colors.deepPurple),
-      hintStyle: TextStyle(color: Colors.grey),
-      floatingLabelStyle: TextStyle(color: Colors.deepPurple),
+      labelStyle: const TextStyle(color: Colors.deepPurple),
+      prefixIcon: Icon(icon, color: Colors.deepPurple[300]),
+      suffixIcon: suffixIcon,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-        borderSide: BorderSide.none,
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-        borderSide: BorderSide.none,
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: Colors.deepPurple),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-        borderSide: BorderSide(color: Colors.deepPurple, width: 2),
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: Colors.deepPurple, width: 2),
       ),
-      filled: true,
-      fillColor: Colors.white,
-      contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-      suffixIcon: suffixIcon,
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: Colors.red, width: 1),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(color: Colors.red, width: 2),
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF8F9FA),
+      backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: Text(
-          'Reset Password',
-          style: TextStyle(color: Colors.white),
-        ),
+        title: const Text('Reset Password', style: TextStyle(color: Colors.deepPurple)),
         centerTitle: true,
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.transparent,
         elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(20),
-          ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.deepPurple),
+          onPressed: () => Get.back(),
         ),
-        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
+        child: Padding(
+            padding: const EdgeInsets.all(25.0),
+            child: Form(
+              key: _formKey,
               child: Column(
                 children: [
-                  SizedBox(height: 16),
-                  Text(
-                    'Security Verification',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.deepPurple,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Please answer your security questions',
-                    style: TextStyle(color: Colors.deepPurple),
-                  ),
-                ],
+                Hero(
+                tag: 'reset_password_hero', // Unique tag for this hero
+                child: Image.asset(
+                  'assets/reset_password_illustration.png', // You'll need an image for this
+                  height: 180,
+                  errorBuilder: (context, error, stackTrace) =>
+                      Icon(Icons.lock_reset, size: 100, color: Colors.deepPurple),
+                ),
               ),
-            ),
-            SizedBox(height: 30),
+              const SizedBox(height: 30),
 
-            // Birth Date Section
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
+              // Error Message Display
+              Obx(() => AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  child: controller.errorMessage.value.isNotEmpty
+                      ? Container(
+                    key: ValueKey(controller.errorMessage.value), // Key for animation
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.red[50],
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Row(
                       children: [
-                        Icon(Icons.cake, color: Colors.deepPurple),
-                        SizedBox(width: 8),
-                        Text(
-                          'Birthdate (day, month, year)',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.deepPurple,
+                        const Icon(Icons.error, color: Colors.red),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            controller.errorMessage.value,
+                            style: const TextStyle(color: Colors.red),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 12),
-                    SizedBox(height: 0),
-                    SizedBox(height: 0),
-                    SizedBox(height: 0),
-                    SizedBox(height: 0),
-                    SizedBox(height: 0),
-                    SizedBox(height: 0),
-                    SizedBox(height: 0),
-                    SizedBox(height: 0),
-                    SizedBox(height: 0),
-                    SizedBox(height: 0),
-                    SizedBox(height: 0),
-                    SizedBox(height: 0),
-                    SizedBox(height: 0),
-                    SizedBox(height: 0),
-                    SizedBox(height: 0),
+                  ):
+                       const SizedBox(key: ValueKey('empty_error_message')),
+            )),
+        const SizedBox(height: 20),
 
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            controller: dayController,
-                            keyboardType: TextInputType.number,
-                            decoration: _inputDecoration('Day', hintText: 'DD'),
-                          ),
-                        ),
-                        SizedBox(width: 12),
-                        Expanded(
-                          child: TextField(
-                            controller: monthController,
-                            keyboardType: TextInputType.number,
-                            decoration: _inputDecoration('Month', hintText: 'MM'),
-                          ),
-                        ),
-                        SizedBox(width: 12),
-                        Expanded(
-                          child: TextField(
-                            controller: yearController,
-                            keyboardType: TextInputType.number,
-                            decoration: _inputDecoration('Year', hintText: 'YYYY'),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+        // Personal Details for Verification
+        Card(
+          elevation: 4,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          margin: const EdgeInsets.symmetric(vertical: 10),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: controller.cityController,
+                  decoration: _inputDecoration('City', Icons.location_city),
+                  validator: (value) => value == null || value.isEmpty ? 'City is required' : null,
                 ),
-              ),
-            ),
-            SizedBox(height: 24),
-
-            // City Field
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                const SizedBox(height: 20),
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        Icon(Icons.location_city, color: Colors.deepPurple),
-                        SizedBox(width: 8),
-                        Text(
-                          'Your City',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.deepPurple,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 12),
-                    TextField(
-                      controller: cityController,
-                      decoration: _inputDecoration('Enter your city', hintText: 'e.g. Tehran'),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 32),
-
-            // Verify Button
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                gradient: LinearGradient(
-                  colors: [Colors.deepPurple, Colors.purpleAccent],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.deepPurple.withOpacity(0.3),
-                    blurRadius: 8,
-                    offset: Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: ElevatedButton(
-                onPressed: verifyAnswers,
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                  backgroundColor: Colors.transparent,
-                  shadowColor: Colors.transparent,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: Center(
-                  child: Text(
-                    'VERIFY INFORMATION',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 16),
-
-            // Message Display
-            if (message.isNotEmpty)
-              Container(
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: message.contains('successfully')
-                      ? Colors.green[50]
-                      : Colors.red[50],
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(
-                    color: message.contains('successfully')
-                        ? Colors.green
-                        : Colors.red,
-                    width: 1,
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    Icon(
-                      message.contains('successfully')
-                          ? Icons.check_circle
-                          : Icons.error,
-                      color: message.contains('successfully')
-                          ? Colors.green
-                          : Colors.red,
-                    ),
-                    SizedBox(width: 12),
                     Expanded(
-                      child: Text(
-                        message,
-                        style: TextStyle(
-                          color: message.contains('successfully')
-                              ? Colors.green
-                              : Colors.red,
-                        ),
+                      child: TextFormField(
+                        controller: controller.dayController,
+                        decoration: _inputDecoration('Day', Icons.calendar_today),
+                        keyboardType: TextInputType.number,
+                        validator: (value) {
+                          final day = int.tryParse(value ?? '');
+                          if (day == null || day < 1 || day > 31) return 'Invalid day';
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: TextFormField(
+                        controller: controller.monthController,
+                        decoration: _inputDecoration('Month', Icons.calendar_today),
+                        keyboardType: TextInputType.number,
+                        validator: (value) {
+                          final month = int.tryParse(value ?? '');
+                          if (month == null || month < 1 || month > 12) return 'Invalid month';
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: TextFormField(
+                        controller: controller.yearController,
+                        decoration: _inputDecoration('Year', Icons.calendar_today),
+                        keyboardType: TextInputType.number,
+                        validator: (value) {
+                          final year = int.tryParse(value ?? '');
+                          if (year == null || year < 1900 || year > DateTime.now().year) return 'Invalid year';
+                          return null;
+                        },
                       ),
                     ),
                   ],
                 ),
-              ),
-            SizedBox(height: 16),
-
-            // Password Reset Section (shown after verification)
-            if (showResetSection) ...[
-              Divider(thickness: 1, color: Colors.grey[300]),
-              SizedBox(height: 24),
-              Center(
-                child: Text(
-                  'Set New Password',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.deepPurple,
-                  ),
-                ),
-              ),
-              SizedBox(height: 24),
-              Card(
-                elevation: 4,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    children: [
-                      TextField(
-                        controller: newPasswordController,
-                        obscureText: obscureNewPassword,
-                        decoration: _inputDecoration(
-                          'New Password',
-                          hintText: 'At least 6 characters',
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              obscureNewPassword
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                obscureNewPassword = !obscureNewPassword;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 16),
-                      SizedBox(height: 0),
-                      SizedBox(height: 0),
-                      SizedBox(height: 0),
-                      SizedBox(height: 0),
-                      SizedBox(height: 0),
-                      SizedBox(height: 0),
-                      SizedBox(height: 0),
-
-                      TextField(
-                        controller: confirmPasswordController,
-                        obscureText: obscureConfirmPassword,
-                        decoration: _inputDecoration(
-                          'Confirm Password',
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              obscureConfirmPassword
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                obscureConfirmPassword = !obscureConfirmPassword;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 32),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  gradient: LinearGradient(
-                    colors: [Colors.deepPurple, Colors.purpleAccent],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.deepPurple.withOpacity(0.3),
-                      blurRadius: 8,
-                      offset: Offset(0, 4),
+                const SizedBox(height: 20),
+                Obx(() => SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: controller.isLoading.value ? null : () {
+                      if (_formKey.currentState!.validate()) {
+                        controller.verifyDetails();
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.deepPurple,
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     ),
-                  ],
-                ),
-                child: ElevatedButton(
-                  onPressed: resetPassword,
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                    child: controller.isLoading.value && !controller.isVerified.value
+                        ? const CircularProgressIndicator(color: Colors.white)
+                        : const Text('Verify Details', style: TextStyle(fontSize: 16, color: Colors.white)),
                   ),
-                  child: Center(
-                    child: Text(
-                      'RESET PASSWORD',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ],
+                )),
+              ],
+            ),
+          ),
         ),
+        const SizedBox(height: 30),
+
+        // New Password Fields (conditionally visible)
+        Obx(() => controller.isVerified.value
+            ? Card(
+          elevation: 4,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          margin: const EdgeInsets.symmetric(vertical: 10),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: controller.newPasswordController,
+                  obscureText: controller.obscureNewPassword.value,
+                  decoration: _inputDecoration(
+                    'New Password',
+                    Icons.lock,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        controller.obscureNewPassword.value ? Icons.visibility_off : Icons.visibility,
+                        color: Colors.grey,
+                      ),
+                      onPressed: controller.toggleNewPasswordVisibility,
+                    ),
+                  ),
+                  validator: controller.validatePassword,
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: controller.confirmNewPasswordController,
+                  obscureText: controller.obscureConfirmNewPassword.value,
+                  decoration: _inputDecoration(
+                    'Confirm New Password',
+                    Icons.lock,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        controller.obscureConfirmNewPassword.value ? Icons.visibility_off : Icons.visibility,
+                        color: Colors.grey,
+                      ),
+                      onPressed: controller.toggleConfirmNewPasswordVisibility,
+                    ),
+                  ),
+                  validator: controller.validateConfirmPassword,
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: controller.isLoading.value ? null : () {
+                      if (_formKey.currentState!.validate()) { // Re-validate the form
+                        controller.resetPassword();
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.deepPurple,
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    ),
+                    child: controller.isLoading.value
+                        ? const CircularProgressIndicator(color: Colors.white)
+                        : const Text('Reset Password', style: TextStyle(fontSize: 16, color: Colors.white)),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        )
+            : const SizedBox.shrink() // Hide password fields until verified
+        ),
+        ],
       ),
+    ),
+    ),
+    ),
     );
   }
 }
-
-
-// ۱. verifyAnswers:
-//
-// بررسی صحت اطلاعات امنیتی (تاریخ تولد و شهر)
-//
-// نمایش بخش تغییر رمز در صورت صحت اطلاعات
-//
-// ۲. resetPassword:
-//
-// بررسی تطابق رمزهای جدید
-//
-// تغییر رمز در صورت معتبر بودن
-//
-// هدایت به صفحه لاگین پس از ۲ ثانیه
-//
-// ۳. _inputDecoration:
-//
-// ایجاد استایل یکسان برای فیلدهای ورودی
-//
-// ۴. build:
-//
-// ساخت رابط کاربری صفحه
-//
-// ویجت‌های کلیدی:
-// ۱. Card:
-//
-// ایجاد کارت‌های زیبا برای بخش‌های مختلف فرم
-//
-// ۲. LinearGradient:
-//
-// ایجاد دکمه‌های با گرادیانت رنگی
-//
-// ۳. ElevatedButton:
-//
-// دکمه‌های اصلی با استایل سفارشی
-//
-// ۴. Get.offAll:
-//
-// مدیریت ناوبری به صفحه لاگین
-//
-// نکات اصلی:
-// طراحی دو مرحله‌ای (تایید هویت + تغییر رمز)
-//
-// اعتبارسنجی اطلاعات امنیتی
-//
-// نمایش پیام‌های خطا/موفقیت
-//
-// امکان نمایش/مخفی کردن رمز عبور
-//
-// استفاده از رنگ‌های بنفش در طراحی
-

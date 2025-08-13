@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'Profile_tab.dart';
-
+import 'package:amiran/WalletController2.dart';
 class PaymentPage extends StatefulWidget {
-  const PaymentPage({Key? key}) : super(key: key);
+  // Add a final variable to store the email
+  final String userEmail;
+
+  // Update the constructor to require the userEmail
+  const PaymentPage({Key? key, required this.userEmail}) : super(key: key);
 
   @override
   State<PaymentPage> createState() => _PaymentPageState();
@@ -272,7 +276,7 @@ class _PaymentPageState extends State<PaymentPage> {
     return '';
   }
 
-  void _processPayment() {
+  Future<void> _processPayment() async {
     final cardNumber = _cardNumberController.text.replaceAll(' ', '');
     if (cardNumber.length != 16) {
       _showError('Please enter a valid 16-digit card number');
@@ -292,7 +296,8 @@ class _PaymentPageState extends State<PaymentPage> {
     }
 
     // Use the WalletController to update balance
-    walletController.addMoney(amount);
+    // CORRECTED LINE: Pass 'this.widget.userEmail' using the named parameter 'email'
+    final resultMessage = await walletController.addMoney(amount, email: this.widget.userEmail);
 
     _showSuccess('\$${amount.toStringAsFixed(2)} added successfully!');
     _cardNumberController.clear();
