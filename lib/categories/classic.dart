@@ -9,6 +9,7 @@ import 'package:just_audio/just_audio.dart';
 import 'dart:math';
 import 'package:amiran/Profile_tab.dart';
 import 'package:amiran/AuthController.dart';
+import 'package:amiran/WalletController2.dart';
 
 import '../login.dart';
 class Song {
@@ -158,7 +159,7 @@ class _ClassicalCategoryPageState extends State<ClassicalCategoryPage> {
       );
     } else {
       final neededAmount = currentSong.price - currentBalance;
-      Get.to(() => PaymentPage());
+      // Get.to(() => PaymentPage());
       Get.snackbar(
         'Insufficient Funds',
         'You need \$${neededAmount.toStringAsFixed(2)} more to purchase this song',

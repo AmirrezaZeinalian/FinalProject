@@ -1,3 +1,4 @@
+import 'package:amiran/userController.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,9 +11,9 @@ import 'categories/pop.dart';
 import 'signup.dart';
 import 'ThemeController2.dart';
 import 'Payment.dart';
-import 'categories/edm.dart';
-import 'categories/jazz.dart';
-import 'categories/pop.dart';
+import 'categories/edm.dart'; // Corrected import to match existing EDMCategoryPage
+import 'categories/jazz.dart'; // Corrected import to match existing JazzCategoryPage
+import 'categories/pop.dart'; // Corrected import to match existing PopCategoryPage
 import 'login.dart';
 import 'favourites_tab.dart';
 import 'shop_tab.dart';
@@ -21,7 +22,7 @@ import 'totallist.dart';
 
 class NavigationController extends GetxController {
   var selectedIndex = 0.obs;
-  final ThemeController themeController = Get.find();
+  final ThemeController themeController = Get.find(); // Assuming ThemeController is put somewhere
 
   void changePage(int index) {
     selectedIndex.value = index;
@@ -31,6 +32,7 @@ class NavigationController extends GetxController {
 
 class MusicHomePage extends StatelessWidget {
   final NavigationController navController = Get.put(NavigationController());
+  final UserController userController = Get.find<UserController>(); // Get the UserController instance
 
   MusicHomePage({super.key});
 
@@ -43,81 +45,101 @@ class MusicHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        title: const Text(
-          '🎵 SEPOTIFY',
-          style: TextStyle(fontWeight: FontWeight.bold),
+    return Obx(() { // Use Obx to react to changes in userController.currentUser
+      final user = userController.currentUser.value; // Get the reactive user map
+
+      return Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          title: const Text(
+            '🎵 SEPOTIFY',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: Colors.deepPurple.withOpacity(0.8),
+          centerTitle: true,
+          elevation: 0,
         ),
-        backgroundColor: Colors.deepPurple.withOpacity(0.8),
-        centerTitle: true,
-        elevation: 0,
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            UserAccountsDrawerHeader(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.deepPurple, Colors.indigo],
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              UserAccountsDrawerHeader(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.deepPurple, Colors.indigo],
+                  ),
+                ),
+                // Display username from UserController, with a fallback
+                accountName: Text(user?['username'] ?? 'Guest User'),
+                // Display email from UserController, with a fallback
+                accountEmail: Text(user?['email'] ?? 'guest@example.com'),
+                currentAccountPicture: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: user?['wallpaperPath'] != null && user!['wallpaperPath'].isNotEmpty && user['wallpaperPath'] != 'null'
+                      ? ClipOval(
+                    // Assuming wallpaperPath is an asset path. If it's a network image, use Image.network
+                    child: Image.asset(
+                      user!['wallpaperPath'],
+                      fit: BoxFit.cover,
+                      width: 90, // Adjust size as needed
+                      height: 90, // Adjust size as needed
+                      errorBuilder: (context, error, stackTrace) {
+                        // Fallback to person icon if image fails to load
+                        return const Icon(Icons.person, size: 40);
+                      },
+                    ),
+                  )
+                      : const Icon(Icons.person, size: 40), // Default icon if no wallpaper path
                 ),
               ),
-              accountName: const Text("Guest"),
-              accountEmail: const Text("guest@example.com"),
-              currentAccountPicture: const CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Icon(Icons.person, size: 40),
+              ListTile(
+                leading: const Icon(Icons.login),
+                title: const Text('Login'),
+                onTap: () {
+                  Get.to(() => LoginPage());
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.app_registration),
+                title: const Text('Sign Up'),
+                onTap: () {
+                  Get.to(() => RegisterPage());
+                },
+              ),
+            ],
+          ),
+        ),
+        body: Stack(
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Colors.deepPurple, Colors.black87],
+                ),
               ),
             ),
-            ListTile(
-              leading: const Icon(Icons.login),
-              title: const Text('Login'),
-              onTap: () {
-                Get.to(LoginPage());
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.app_registration),
-              title: const Text('Sign Up'),
-              onTap: () {
-                Get.to(RegisterPage());
-              },
-            ),
+            pages[navController.selectedIndex.value],
           ],
         ),
-      ),
-      body: Stack(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Colors.deepPurple, Colors.black87],
-              ),
-            ),
-          ),
-          pages[navController.selectedIndex.value],
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: navController.selectedIndex.value,
-        onTap: navController.changePage,
-        selectedItemColor: Colors.deepPurpleAccent,
-        unselectedItemColor: Colors.grey,
-        backgroundColor: Colors.white,
-        showUnselectedLabels: true,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Shop'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'List'), // New List button
-        ],
-      ),
-    ));
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: navController.selectedIndex.value,
+          onTap: navController.changePage,
+          selectedItemColor: Colors.deepPurpleAccent,
+          unselectedItemColor: Colors.grey,
+          backgroundColor: Colors.white,
+          showUnselectedLabels: true,
+          type: BottomNavigationBarType.fixed,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Shop'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+            BottomNavigationBarItem(icon: Icon(Icons.list), label: 'List'), // New List button
+          ],
+        ),
+      );
+    });
   }
 }
 
@@ -248,7 +270,7 @@ class HomeContent extends StatelessWidget {
                   BoxShadow(
                     color: color.withOpacity(0.4),
                     blurRadius: 8,
-                    offset: Offset(0, 4),
+                    offset: const Offset(0, 4),
                   )
                 ],
               ),

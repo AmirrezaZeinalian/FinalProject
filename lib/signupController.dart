@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'ProfileComplementPage.dart';
-import 'ProfileComplementPage2.dart';
+// import 'ProfileComplementPage.dart'; // No longer needed directly for this flow
+import 'ProfileComplementPage2.dart'; // Corrected import for the target page
 
 class SignupController extends GetxController {
   final usernameController = TextEditingController();
@@ -11,7 +11,7 @@ class SignupController extends GetxController {
 
   final obscurePassword = true.obs;
   final obscureConfirmPassword = true.obs;
-  final isLoading = false.obs;
+  final isLoading = false.obs; // This will now control loading for the *first* signup step
 
   void togglePasswordVisibility() {
     obscurePassword.value = !obscurePassword.value;
@@ -25,7 +25,9 @@ class SignupController extends GetxController {
   String? validateUsername(String? value) {
     if (value == null || value.trim().isEmpty) return 'Username is required';
     if (value.length < 4) return 'Username must be at least 4 characters';
-    if (['user1', 'admin', 'test'].contains(value)) return 'This username is already taken';
+    // Note: Username availability check should ideally be done async with backend
+    // For now, this is a client-side placeholder check.
+    if (['user1', 'admin', 'test'].contains(value.toLowerCase())) return 'This username is already taken (example)';
     return null;
   }
 
@@ -60,22 +62,20 @@ class SignupController extends GetxController {
   }
 
   void register(GlobalKey<FormState> formKey) async {
+    // Before navigating, validate the first set of fields
     if (formKey.currentState!.validate()) {
-      isLoading.value = true;
+      // No need for a delay here, as the actual signup will happen on the next page
+      // and that page will handle its own loading.
 
-      await Future.delayed(Duration(seconds: 2));
-
-      isLoading.value = false;
-
-      Get.snackbar(
-        'Success',
-        'Account created!',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green.withOpacity(0.1),
-        colorText: Colors.green,
+      Get.to(
+            () => ProfileCompletionPage2(
+          username: usernameController.text,
+          email: emailController.text,
+          password: passwordController.text,
+        ),
+        transition: Transition.rightToLeft, // Use a transition for a smoother UX
+        duration: const Duration(milliseconds: 500),
       );
-
-      Get.to(() => ProfileCompletionPage2());
     }
   }
 
@@ -88,58 +88,3 @@ class SignupController extends GetxController {
     super.onClose();
   }
 }
-
-
-
-
-// ۱. togglePasswordVisibility:
-//
-// نمایش/مخفی کردن رمز عبور
-//
-// ۲. toggleConfirmPasswordVisibility:
-//
-// نمایش/مخفی کردن تکرار رمز عبور
-//
-// ۳. validateUsername:
-//
-// بررسی نام کاربری (عدم خالی بودن، حداقل ۴ کاراکتر و عدم تکراری بودن)
-//
-// ۴. validateEmail:
-//
-// بررسی صحت فرمت ایمیل
-//
-// ۵. validatePassword:
-//
-// بررسی پیچیدگی رمز عبور (حداقل ۸ کاراکتر، حروف بزرگ و کوچک، عدد و کاراکتر خاص)
-//
-// ۶. validateConfirmPassword:
-//
-// بررسی تطابق رمز عبور و تکرار آن
-//
-// ۷. register:
-//
-// ثبت نام کاربر و انتقال به صفحه تکمیل پروفایل
-//
-// ۸. onClose:
-//
-// آزادسازی منابع کنترلرها هنگام بسته شدن
-//
-// ویجت‌های مهم:
-// ۱. Obx:
-//
-// برای مشاهده تغییرات متغیرهای observable (مثل obscurePassword)
-//
-// ۲. Get.snackbar:
-//
-// نمایش پیام موفقیت آمیز بودن ثبت نام
-//
-// ۳. Get.to:
-//
-// انتقال به صفحه تکمیل پروفایل بعد از ثبت نام
-//
-// نکات کلیدی:
-// استفاده از GetX برای مدیریت حالت
-//
-// اعتبارسنجی پیشرفته برای فیلدها
-//
-// طراحی ماژولار و قابل استفاده مجدد

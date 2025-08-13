@@ -45,7 +45,7 @@ class LoginPage extends StatelessWidget {
               // Email Field
               Obx(() => TextField(
                 decoration: InputDecoration(
-                  labelText: 'Email or Username',
+                  labelText: 'Email',
                   labelStyle: TextStyle(color: Colors.deepPurple),
                   prefixIcon: Icon(Icons.email, color: Colors.deepPurple[300]),
                   border: OutlineInputBorder(
@@ -236,54 +236,4 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-// ۱. build:
-//
-// ساخت رابط کاربری صفحه لاگین با تمام المان‌ها
-//
-// ۲. togglePasswordVisibility (در کنترلر):
-//
-// تغییر حالت نمایش/مخفی کردن رمز عبور
-//
-// ۳. login (در کنترلر):
-//
-// پردازش عملیات ورود به سیستم
-//
-// ویجت‌های کلیدی:
-// ۱. Obx:
-//
-// نمایش واکنش‌گرای تغییرات حالت‌ها از کنترلر
-//
-// ۲. AnimatedSwitcher:
-//
-// نمایش انیمیشنی پیام خطا
-//
-// ۳. AnimatedContainer:
-//
-// دکمه لاگین با انیمیشن و گرادیانت
-//
-// ۴. Hero:
-//
-// انیمیشن انتقال برای تصویر صفحه
-//
-// ۵. Get.to:
-//
-// مدیریت ناوبری به صفحات دیگر (ثبت نام، بازیابی رمز)
-//
-// نکات اصلی طراحی:
-// رابط کاربری مدرن با رنگ‌های بنفش
-//
-// اعتبارسنجی فیلدها
-//
-// حالت loading هنگام ورود
-//
-// لینک به صفحات ثبت نام و بازیابی رمز
-//
-// امکان نمایش/مخفی کردن رمز عبور
-//
-// پشتیبانی از ورود با شبکه‌های اجتماع
 

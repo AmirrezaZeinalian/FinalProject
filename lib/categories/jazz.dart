@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:just_audio/just_audio.dart';
 import 'dart:math';
 import 'package:amiran/Profile_tab.dart';
+import 'package:amiran/WalletController2.dart';
 
 import '../AuthController.dart';
 import '../login.dart';
@@ -139,7 +140,7 @@ class _JazzCategoryPageState extends State<JazzCategoryPage> {
       );
     } else {
       final neededAmount = currentSong.price - currentBalance;
-      Get.to(() => PaymentPage());
+      // Get.to(() => PaymentPage());
       Get.snackbar(
         'Insufficient Funds',
         'You need \$${neededAmount.toStringAsFixed(2)} more to purchase this song',
