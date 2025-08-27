@@ -1,3 +1,4 @@
+import 'package:amiran/pages/song_list_page.dart';
 import 'package:amiran/userController.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,7 @@ class MusicHomePage extends StatelessWidget {
     ShopPage(),
     ProfileTab(),
     totallist(),
+    SongListPage(),
   ];
 
   @override
@@ -136,6 +138,7 @@ class MusicHomePage extends StatelessWidget {
             BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Shop'),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
             BottomNavigationBarItem(icon: Icon(Icons.list), label: 'List'), // New List button
+            BottomNavigationBarItem(icon: Icon(Icons.list), label: 'List'),
           ],
         ),
       );
