@@ -42,11 +42,11 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: themeController.theme, // reactive theme mode
       initialRoute: '/splash',
-      // getPages: [
-      //   GetPage(name: '/splash', page: () => const SplashScreen()),
-      //   GetPage(name: '/home', page: () => OnboardingPage()),
-      // ],
-      home: MusicHomePage(),
+      getPages: [
+        GetPage(name: '/splash', page: () => const SplashScreen()),
+        GetPage(name: '/home', page: () => OnboardingPage()),
+      ],
+      // home: MusicHomePage(),
     ));
   }
 }
