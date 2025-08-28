@@ -13,7 +13,7 @@ class LoginController extends GetxController {
   final isLoading = false.obs;
   final passwordVisible = false.obs;
 
-  static const String _serverIp = '192.168.100.3';
+  static const String _serverIp = '10.183.186.120';
   static const int _serverPort = 12346;
 
   void togglePasswordVisibility() => passwordVisible.toggle();

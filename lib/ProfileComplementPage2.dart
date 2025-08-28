@@ -32,7 +32,7 @@ class _ProfileCompletionPage2State extends State<ProfileCompletionPage2> {
   final RxBool _isLoading = false.obs; // Local loading indicator for this page
 
   // Define your backend server IP and port
-  static const String _serverIp = '192.168.100.3'; // Your backend server IP
+  static const String _serverIp = '10.183.186.120'; // Your backend server IP
   static const int _serverPort = 12345; // Your backend server port
 
   InputDecoration inputDecoration(String label, IconData icon, {String? hintText}) {

@@ -18,7 +18,7 @@ class ResetPasswordController extends GetxController {
   final obscureConfirmNewPassword = true.obs;
 
   // Backend server details
-  static const String _serverIp = '192.168.100.3';
+  static const String _serverIp = '10.183.186.1201';
   static const int _serverPort = 12347; // The new port for reset password
 
   void toggleNewPasswordVisibility() {

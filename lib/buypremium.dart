@@ -28,7 +28,7 @@ class _BuyPremiumPageState extends State<BuyPremiumPage> {
   final UserController userController = Get.find<UserController>();
 
   // IMPORTANT: Ensure this IP address is correct for your Java backend server
-  static const String serverIp = '192.168.100.3';
+  static const String serverIp = '172.29.22.11';
   static const int profilePort = 13579;
 
   @override
