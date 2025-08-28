@@ -36,7 +36,7 @@ class _ProfileTabState extends State<ProfileTab> {
   // IMPORTANT: Ensure this IP address is correct for your Java backend server
   // If running on emulator, 10.0.2.2 is common for localhost.
   // If running on a physical device, it must be the actual IP of your machine.
-  static const String serverIp = '192.168.100.3';
+  static const String serverIp = '10.183.186.120';
   static const int profilePort = 13579;
   // NEW: Dedicated port for refreshing user data
   static const int refreshUserPort = 13580;

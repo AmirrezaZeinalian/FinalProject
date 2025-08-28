@@ -7,7 +7,7 @@ class WalletController2 extends GetxController {
   String? userEmail; // Can be null
   var balance = 0.0.obs;
 
-  static const String serverIp = '192.168.100.3';
+  static const String serverIp = '10.183.186.120';
   static const int serverPort = 13579;
 
   @override
