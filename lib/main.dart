@@ -13,9 +13,6 @@ import 'introAnimation.dart';
 import 'introwalk.dart';
 import 'package:amiran/WalletController2.dart';
 
-import 'local_music_home_page.dart';
-import 'local_music_service.dart';
-
 void main() {
   Get.put(AuthController());
   Get.put(ThemeController()); // Inject ThemeController once here
@@ -50,7 +47,6 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/home', page: () => OnboardingPage()),
       ],
       // home: MusicHomePage(),
-      // home: LocalMusicHomePage(),
     ));
   }
 }
