@@ -110,7 +110,7 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
       _scrollToBottom();
 
       try {
-        const String serverIp = '192.168.100.3';
+        const String serverIp = '10.183.186.35';
         const int serverPort = 13579; // The PROFILE port for contact action
 
         final Socket socket = await Socket.connect(serverIp, serverPort);

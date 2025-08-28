@@ -4,6 +4,7 @@ import 'resetPassword.dart';
 import 'signup.dart';
 import 'AuthController.dart';
 import 'logincontroller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 //it has logic
 // it has design
@@ -190,6 +191,7 @@ class LoginPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+
                   IconButton(
                     icon: Image.asset(
                       'assets/google.png',
@@ -197,8 +199,19 @@ class LoginPage extends StatelessWidget {
                       errorBuilder: (context, error, stackTrace) =>
                           Icon(Icons.g_mobiledata, size: 40),
                     ),
-                    onPressed: () {},
+                    onPressed: () async { // 👈 Make the function async
+                      const url = 'https://www.google.com'; // 👈 Define your URL
+                      final Uri uri = Uri.parse(url);
+
+                      if (await canLaunchUrl(uri)) { // 👈 Check if the URL can be launched
+                        await launchUrl(uri); // 👈 Launch the URL
+                      } else {
+                        // Handle the error if the URL can't be launched
+                        throw 'Could not launch $url';
+                      }
+                    },
                   ),
+                  
                   SizedBox(width: 20),
                   IconButton(
                     icon: Image.asset(

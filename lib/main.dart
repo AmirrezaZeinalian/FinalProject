@@ -13,6 +13,9 @@ import 'introAnimation.dart';
 import 'introwalk.dart';
 import 'package:amiran/WalletController2.dart';
 
+import 'local_music_home_page.dart';
+import 'local_music_service.dart';
+
 void main() {
   Get.put(AuthController());
   Get.put(ThemeController()); // Inject ThemeController once here
@@ -42,11 +45,12 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: themeController.theme, // reactive theme mode
       initialRoute: '/splash',
-      // getPages: [
-      //   GetPage(name: '/splash', page: () => const SplashScreen()),
-      //   GetPage(name: '/home', page: () => OnboardingPage()),
-      // ],
-      home: MusicHomePage(),
+      getPages: [
+        GetPage(name: '/splash', page: () => const SplashScreen()),
+        GetPage(name: '/home', page: () => OnboardingPage()),
+      ],
+      // home: MusicHomePage(),
+      // home: LocalMusicHomePage(),
     ));
   }
 }

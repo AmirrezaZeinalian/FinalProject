@@ -1,2 +1,3 @@
-amir2$a@gmail.com$Aa12345@$5$5$2005$rasht$10341234$true$56a40b65-ec0b-4193-80b0-52d317391dcf.jpg$2026-02-11$true
+amir2$a@gmail.com$Aa12345@$5$5$2005$rasht$10341234$false$dcff6228-0119-4cdc-b6d7-cb81770c26f3.jpg$2026-02-11$true
 alii$ali@gmail.com$Aa12345@$5$5$2005$rasht$13400$false$default_avatar.png$2025-09-11$true
+arash$ar@gmail.com$Aa12345@$5$5$2005$rasht$0$false$default_avatar.png$null$false
